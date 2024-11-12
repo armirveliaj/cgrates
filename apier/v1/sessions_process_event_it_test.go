@@ -476,7 +476,7 @@ func testSSv1ItProcessCDRForSessionFromProcessEvent(t *testing.T) {
 	}
 	var rply string
 	if err := sSv1BiRpc.Call(context.Background(), utils.SessionSv1ProcessCDR,
-		args, &rply); err != nil {
+		&args, &rply); err != nil {
 		t.Error(err)
 	}
 	if rply != utils.OK {

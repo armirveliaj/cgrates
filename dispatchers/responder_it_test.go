@@ -96,7 +96,7 @@ func testDspResponderStatus(t *testing.T) {
 func getNodeWithRoute(route string, t *testing.T) string {
 	var reply map[string]any
 	var pingReply string
-	pingEv := utils.CGREvent{
+	pingEv := &utils.CGREvent{
 		Tenant: "cgrates.org",
 		Event: map[string]any{
 			utils.EventName: "Random",
@@ -169,7 +169,7 @@ func testDspResponderShutdown(t *testing.T) {
 
 func testDspResponderBroadcast(t *testing.T) {
 	var pingReply string
-	pingEv := utils.CGREvent{
+	pingEv := &utils.CGREvent{
 		Tenant: "cgrates.org",
 		Event: map[string]any{
 			utils.EventName: "Broadcast",
@@ -205,7 +205,7 @@ func testDspResponderInternal(t *testing.T) {
 	var reply map[string]any
 	var pingReply string
 	route := "internal"
-	pingEv := utils.CGREvent{
+	pingEv := &utils.CGREvent{
 		Tenant: "cgrates.org",
 		Event: map[string]any{
 			utils.EventName: "Internal",
