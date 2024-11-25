@@ -20,11 +20,13 @@ package utils
 
 import (
 	"strings"
+	"sync"
 	"time"
 )
 
 // CGREvent is a generic event processed by CGR services
 type CGREvent struct {
+	mu      sync.RWMutex
 	Tenant  string
 	ID      string
 	Time    *time.Time // event time
@@ -241,4 +243,24 @@ func (attr *CGREvent) RPCClone() (any, error) {
 		return attr, nil
 	}
 	return attr.Clone(), nil
+}
+
+// RLock exported function from sync.RWMutex
+func (e *CGREvent) RLock() {
+	e.mu.RLock()
+}
+
+// RUnlock exported function from sync.RWMutex
+func (e *CGREvent) RUnlock() {
+	e.mu.RUnlock()
+}
+
+// Lock exported function from sync.RWMutex
+func (e *CGREvent) Lock() {
+	e.mu.Lock()
+}
+
+// RUnlock exported function from sync.RWMutex
+func (e *CGREvent) Unlock() {
+	e.mu.Unlock()
 }

@@ -114,7 +114,7 @@ func TestAsteriskAgentV1AlterSession(t *testing.T) {
 	tAsteriskAgent := &AsteriskAgent{}
 	tCGREvent := utils.CGREvent{}
 	tString := ""
-	err := tAsteriskAgent.V1AlterSession(nil, tCGREvent, &tString)
+	err := tAsteriskAgent.V1AlterSession(nil, &tCGREvent, &tString)
 	if err != utils.ErrNotImplemented {
 		t.Errorf("Expected error: %v, got: %v", utils.ErrNotImplemented, err)
 	}

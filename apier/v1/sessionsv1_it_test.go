@@ -90,8 +90,8 @@ func testSSv1ItInitCfgDir(t *testing.T) {
 type smock struct{}
 
 func (*smock) DisconnectSession(ctx *context.Context,
-	args utils.CGREvent, reply *string) error {
-	discEvChan <- args
+	args *utils.CGREvent, reply *string) error {
+	discEvChan <- *args
 	// free the channel
 	<-discEvChan
 	*reply = utils.OK

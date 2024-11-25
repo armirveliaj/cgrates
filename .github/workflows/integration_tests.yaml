@@ -3,7 +3,7 @@ name: integration
 on:
   push:
     branches:
-      - master
+      - ErrorsLock
     paths-ignore:
       - 'docs/**'
       - README.md

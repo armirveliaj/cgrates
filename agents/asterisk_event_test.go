@@ -412,7 +412,7 @@ func TestSMAEventV1InitSessionArgs(t *testing.T) {
 		t.Error(err)
 	}
 	smaEv := NewSMAsteriskEvent(ev, "127.0.0.1", "")
-	if rcv := smaEv.V1InitSessionArgs(*cgrEv); !reflect.DeepEqual(exp, rcv) {
+	if rcv := smaEv.V1InitSessionArgs(cgrEv); !reflect.DeepEqual(exp, rcv) {
 		t.Errorf("Expecting: %+v, received: %+v", utils.ToJSON(exp), utils.ToJSON(rcv))
 	}
 
@@ -423,7 +423,7 @@ func TestSMAEventV1InitSessionArgs(t *testing.T) {
 		CGREvent:          cgrEv,
 	}
 	cgrEv.Event[utils.CGRFlags] = "*resources+*accounts+*attributes"
-	if rcv := smaEv.V1InitSessionArgs(*cgrEv); !reflect.DeepEqual(exp2, rcv) {
+	if rcv := smaEv.V1InitSessionArgs(cgrEv); !reflect.DeepEqual(exp2, rcv) {
 		t.Errorf("Expecting: %+v, received: %+v", utils.ToJSON(exp2), utils.ToJSON(rcv))
 	}
 }
@@ -445,7 +445,7 @@ func TestSMAEventV1TerminateSessionArgs(t *testing.T) {
 		t.Error(err)
 	}
 	smaEv := NewSMAsteriskEvent(ev, "127.0.0.1", "")
-	if rcv := smaEv.V1TerminateSessionArgs(*cgrEv); !reflect.DeepEqual(exp, rcv) {
+	if rcv := smaEv.V1TerminateSessionArgs(cgrEv); !reflect.DeepEqual(exp, rcv) {
 		t.Errorf("Expecting: %+v, received: %+v", utils.ToJSON(exp), utils.ToJSON(rcv))
 	}
 
@@ -456,7 +456,7 @@ func TestSMAEventV1TerminateSessionArgs(t *testing.T) {
 		CGREvent:         cgrEv,
 	}
 	cgrEv.Event[utils.CGRFlags] = "*resources+*accounts+*stats"
-	if rcv := smaEv.V1TerminateSessionArgs(*cgrEv); !reflect.DeepEqual(exp2, rcv) {
+	if rcv := smaEv.V1TerminateSessionArgs(cgrEv); !reflect.DeepEqual(exp2, rcv) {
 		t.Errorf("Expecting: %+v, received: %+v", utils.ToJSON(exp2), utils.ToJSON(rcv))
 	}
 }
@@ -603,8 +603,8 @@ func TestRestoreAndUpdateFieldsOk(t *testing.T) {
 	}
 	if err := smaEv.RestoreAndUpdateFields(&cgrEv); err != nil {
 		t.Error(err)
-	} else if utils.ToJSON(cgrEv) != utils.ToJSON(exp) {
-		t.Errorf("Expected <%v>, \nreceived <%v>", utils.ToJSON(exp), utils.ToJSON(cgrEv))
+	} else if utils.ToJSON(&cgrEv) != utils.ToJSON(&exp) {
+		t.Errorf("Expected <%v>, \nreceived <%v>", utils.ToJSON(&exp), utils.ToJSON(&cgrEv))
 	}
 
 }
